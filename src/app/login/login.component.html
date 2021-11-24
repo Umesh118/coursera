@@ -14,6 +14,7 @@
                 <input matInput placeholder="Username" type="text" [(ngModel)]="user.username" name="username"
                     #username="ngModel" required>
                 <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
+                <!-- <mat-error *ngIf="username.errors?.minlength">Username should be at least 5 charactors long.</mat-error> -->
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password"
