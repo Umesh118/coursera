@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Imported Components
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
@@ -65,6 +66,7 @@ import { LeaderService } from './services/leader.service';
     MatCheckboxModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
   ],
   providers: [DishService, PromotionService, LeaderService],
   entryComponents: [LoginComponent],
