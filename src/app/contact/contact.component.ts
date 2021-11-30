@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { flyInOut } from '../animations/animation';
+import { flyInOut, expand } from '../animations/animation';
 import { Feedback, ContactType } from '../shared/feedback';
+import { FeedbackService } from '../services/feedback.service';
 
 interface Map {
   [key: string]: string
@@ -23,16 +24,24 @@ interface Map2 {
     'style': 'display:block'
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
   feedbackForm!: FormGroup;
   feedback!: Feedback;
+  feedbackData!: Feedback;
   contactType = ContactType;
+  isLoading!: boolean;
+  isShowingResponse!: boolean;
+  errMsg!: string;
+
   @ViewChild('fform') feedbackFormDirective!: any;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {
     this.createForm();
+    this.isLoading = false;
+    this.isShowingResponse = false;
   }
 
 
@@ -65,7 +74,9 @@ export class ContactComponent implements OnInit {
     }
   };
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
 
   createForm() {
     this.feedbackForm = this.fb.group({
@@ -84,8 +95,20 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.feedback = this.feedbackForm.value;
     console.log(this.feedback);
+    this.feedbackService.submitFeedback(this.feedback).subscribe(
+      (feedback) => { this.feedbackData = feedback },
+      errmess => { this.errMsg = <any>errmess },
+      () => {
+        this.isShowingResponse = true;
+        setTimeout(() => {
+          this.isShowingResponse = false;
+          this.isLoading = false;
+        }, 5000)
+      });
+
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
