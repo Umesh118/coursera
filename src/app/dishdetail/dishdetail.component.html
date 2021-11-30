@@ -1,7 +1,7 @@
 <div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.sm="column"
     fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10x" fxLayoutGap.xs="0">
 
-    <div fxFlex="40" *ngIf="dish">
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
         <mat-card>
             <mat-card-title>
                 <mat-card-header>
@@ -36,7 +36,7 @@
         <h4> {{errMess}} </h4>
     </div>
 
-    <div fxFlex="40" *ngIf="dish" class="form-size">
+    <div fxFlex="40" *ngIf="dish" class="form-size" [@visibility]="visibility">
         <mat-list>
             <h1>Comments</h1>
 
