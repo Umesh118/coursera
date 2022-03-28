@@ -97,7 +97,7 @@ export class ContactComponent implements OnInit {
   onSubmit() {
     this.isLoading = true;
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    // console.log(this.feedback);
     this.feedbackService.submitFeedback(this.feedback).subscribe(
       (feedback) => { this.feedbackData = feedback },
       errmess => { this.errMsg = <any>errmess },
